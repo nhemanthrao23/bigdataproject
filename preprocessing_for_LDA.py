@@ -22,6 +22,19 @@ df2 = sqlContext.read.json(mydir2)
 ## joining business and review jsons
 df = df1.join(df2,(df1.business_id==df2.business_id)).drop(df2.business_id)
 
+## filtering all the dessert places from the dataset
+sweets=df.where(array_contains(df.categories,"Bakeries")|\
+              array_contains(df.categories,"Creperies")| \
+              array_contains(df.categories,"Cupcakes") | \
+              array_contains(df.categories, "Desserts") | \
+              array_contains(df.categories, "Donuts") | \
+              array_contains(df.categories, "Gelato") | \
+              array_contains(df.categories, "Ice Cream & Frozen Yogurt") | \
+              array_contains(df.categories, "Macarons") | \
+              array_contains(df.categories, "Milkshake Bars") | \
+              array_contains(df.categories, "Patisserie/Cake Shop"))
+
+
 ## creating a temp table
 
 sweets.registerTempTable('sweets')
