@@ -6,4 +6,4 @@ we aim to derive insights about what dining experience topics carry the most wei
 
 
 
-https://user-images.githubusercontent.com/29344615/33693044-1e1ef026-dab6-11e7-9c95-e0dbd84279b4.png
+<img width="815" alt="methodology" src="https://user-images.githubusercontent.com/29344615/33693044-1e1ef026-dab6-11e7-9c95-e0dbd84279b4.png">
