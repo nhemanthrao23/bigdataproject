@@ -15,3 +15,6 @@ Install text blob for finding the polarity of your aspects
 pip install -U textblob 
 
 
+The summary of our analysis can be found at
+
+https://github.com/nhemanthrao23/bigdataproject/blob/master/Analysis%20Summary.md
