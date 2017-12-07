@@ -22,35 +22,33 @@ df2 = sqlContext.read.json(mydir2)
 ## joining business and review jsons
 df = df1.join(df2,(df1.business_id==df2.business_id)).drop(df2.business_id)
 
+## filtering all the chinese cuisine places from the dataset. 
+## You can similarly filter out different cuisines
+
+asian=combined_df.where(
+    array_contains(combined_df.categories,"Chinese")|\
+    array_contains(combined_df.categories,"Cantonese")|\ 
+     array_contains(combined_df.categories, "Taiwanese")|\
+    array_contains(combined_df.categories, "Szechuan")) 
+
 ## creating a temp table
 
-sweets.registerTempTable('sweets')
-sweetsdf = sqlContext.sql('select business_id, text from sweets')
+asian.registerTempTable('asian')
+asiandf = sqlContext.sql('select business_id, text from asian')
+
+## storing in a rdd
+asianrdd = asiandf.rdd
 
 ## keeping only words. No numbers or spaces.
 
 pattern1 = re.compile('\W+|\W+$|[^\w\s]+|_')
 pattern2 = re.compile(r'\W*\b\w{1,2}\b')
 
-#pattern1 = re.compile(r'\b(' + r'|'.join(stopwords.words('english')) + r')\b\s*')
-
-rdd = sweetsrdd \
+rdd = asianrdd \
     .mapValues(lambda x: pattern1.sub(' ', x)) \
     .mapValues(lambda x: pattern2.sub(' ', x))
 
 df = rdd.toDF(schema=['file', 'text'])
-
-## filtering all the dessert places from the dataset
-sweets=df.where(array_contains(df.categories,"Bakeries")|\
-              array_contains(df.categories,"Creperies")| \
-              array_contains(df.categories,"Cupcakes") | \
-              array_contains(df.categories, "Desserts") | \
-              array_contains(df.categories, "Donuts") | \
-              array_contains(df.categories, "Gelato") | \
-              array_contains(df.categories, "Ice Cream & Frozen Yogurt") | \
-              array_contains(df.categories, "Macarons") | \
-              array_contains(df.categories, "Milkshake Bars") | \
-              array_contains(df.categories, "Patisserie/Cake Shop"))
 
 
 ## creating a dictionary so that each review/text has a unique index to it
@@ -128,6 +126,9 @@ print 'done'
 count_vectorizer_model = cv.fit(vector_stemmed_df)
 print 'done'
 result = count_vectorizer_model.transform(vector_stemmed_df)
+
+corpus = result.select(F.col('id').cast("long"), 'vectors').rdd \
+    .map(lambda x: [x[0], x[1]])
 
 # Runnign LDA after processing the data
 lda_model = LDA.train(rdd=corpus, k=5, seed=12, maxIterations=50)
