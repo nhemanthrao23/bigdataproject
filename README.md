@@ -13,3 +13,5 @@ Run LDA to find out the aspects from the reviews
 Install text blob for finding the polarity of your aspects
 
 pip install -U textblob 
+
+<img width="815" alt="methodology" src="https://user-images.githubusercontent.com/29344615/33693044-1e1ef026-dab6-11e7-9c95-e0dbd84279b4.png">
