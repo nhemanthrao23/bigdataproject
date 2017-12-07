@@ -19,9 +19,6 @@ The summary of our analysis can be found at
 
 https://github.com/nhemanthrao23/bigdataproject/blob/master/Analysis%20Summary.md
 
-Our detailed report can be found at
-
-
 Presentation to our project 
 
 https://prezi.com/p/wkcbwtuwy3hf/
