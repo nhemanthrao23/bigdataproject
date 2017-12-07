@@ -28,7 +28,7 @@ df = df1.join(df2,(df1.business_id==df2.business_id)).drop(df2.business_id)
 asian=combined_df.where(
     array_contains(combined_df.categories,"Chinese")|\
     array_contains(combined_df.categories,"Cantonese")|\ 
-     array_contains(combined_df.categories, "Taiwanese")|\
+    array_contains(combined_df.categories, "Taiwanese")|\
     array_contains(combined_df.categories, "Szechuan")) 
 
 ## creating a temp table
