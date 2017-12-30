@@ -22,3 +22,7 @@ https://github.com/nhemanthrao23/bigdataproject/blob/master/Analysis%20Summary.m
 Presentation to our project 
 
 https://prezi.com/p/wkcbwtuwy3hf/
+
+
+
+<img width="815" alt="methodology" src="https://user-images.githubusercontent.com/29344615/33693044-1e1ef026-dab6-11e7-9c95-e0dbd84279b4.png">
